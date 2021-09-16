@@ -1,9 +1,27 @@
-import Vue from 'vue';
-
 require('./bootstrap');
 
-Vue.component('posts-index',require('./components/Posts/index').default)
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+
+Vue.use(VueRouter)
+
+import App from './components/App';
+import PostIndex from './components/Posts/index';
+
+
+const router = new VueRouter({
+    mode: 'history',
+    routes:[
+        {
+            path:'/',
+            component: PostIndex,
+            name:'posts.index'
+        },
+    ]
+})
 
 const app = new Vue({
-    el:'#app'
+    el:'#app',
+    components: {App},
+    router
 });

@@ -1,24 +1,26 @@
 <template>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        </tbody>
-    </table>
+    <div>
+        <div v-for="post in posts" :key="post.uuid">
+            <a href="">
+                <h1>{{ post.title }}</h1>
+            </a>
+
+        </div>
+    </div>
 </template>
 
 <script>
+export default {
+    data() {
+        return {
+            posts: {},
+        }
+    },
 
+    mounted() {
+        axios.get('/api/posts').then(response=>{
+            this.posts = response.data.data
+        })
+    }
+}
 </script>
