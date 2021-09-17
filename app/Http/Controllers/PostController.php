@@ -12,4 +12,9 @@ class PostController extends Controller
     {
         return PostResource::collection(Post::wherePublished(true)->get());
     }
+
+    public function show(Post $post)
+    {
+        return new PostResource($post);
+    }
 }

@@ -2,7 +2,7 @@
     <div class="container">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <router-link to="/">Posts List</router-link>
+                <!-- <router-link to="/">Posts List</router-link> -->
             </li>
             <!-- <li class="nav-item">
                 <router-link to="/posts/create">Create Post</router-link>

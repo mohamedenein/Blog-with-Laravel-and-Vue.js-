@@ -6,7 +6,9 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter)
 
 import App from './components/App';
-import PostIndex from './components/Posts/index';
+import PostsIndex from './components/Posts/index';
+import Post from './components/Posts/post';
+
 
 
 const router = new VueRouter({
@@ -14,8 +16,13 @@ const router = new VueRouter({
     routes:[
         {
             path:'/',
-            component: PostIndex,
+            component: PostsIndex,
             name:'posts.index'
+        },
+        {
+            path:'/post/:slug',
+            component: Post,
+            name:'post',
         },
     ]
 })
