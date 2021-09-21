@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" style="margin-top: 20px">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <!-- <router-link to="/">Posts List</router-link> -->

@@ -10,7 +10,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        return PostResource::collection(Post::wherePublished(true)->paginate(20));
+        $posts = Post::when(request('category_id','') !='',function ($query) {
+            $query->where('category_id', request('category_id'));
+        })->paginate(20);
+
+        return PostResource::collection($posts);
     }
 
     public function show(Post $post)
