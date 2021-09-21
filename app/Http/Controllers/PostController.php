@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        return PostResource::collection(Post::wherePublished(true)->get());
+        return PostResource::collection(Post::wherePublished(true)->paginate(20));
     }
 
     public function show(Post $post)

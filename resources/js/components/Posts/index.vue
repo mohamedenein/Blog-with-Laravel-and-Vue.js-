@@ -1,4 +1,5 @@
 <template>
+<div>
     <table class="table table-striped table-hover" style="margin-top: 20px;">
         <thead class="table-dark">
         <tr>
@@ -9,14 +10,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="post in posts">
+        <tr v-for="post in posts.data">
             <td>{{ post.id }}</td>
             <td><router-link :to="'/post/' + post.slug">{{ post.title }}</router-link></td>
-            <td>{{ post.body }}</td>
+            <td>{{ post.body.substring(0,30) }}</td>
             <td>{{ post.created_at }}</td>
         </tr>
         </tbody>
     </table>
+    <pagination :data="posts" @pagination-change-page="getResults"></pagination>
+
+</div>
 </template>
 
 <script>
@@ -28,10 +32,16 @@ export default {
     },
 
     mounted() {
-        axios.get('/api/posts').then(response=>{
-            this.posts = response.data.data
-        })
-        console.log(this.posts);
+        this.getResults();
+    },
+
+    methods:{
+        getResults(page = 1) {
+            axios.get('/api/posts?page=' + page)
+                .then(response => {
+                    this.posts = response.data;
+                });
+        }
     }
 }
 </script>

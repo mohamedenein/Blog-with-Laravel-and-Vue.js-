@@ -1,7 +1,9 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+Vue.component('pagination', require('laravel-vue-pagination'));
 import VueRouter from 'vue-router';
+
 
 Vue.use(VueRouter)
 
