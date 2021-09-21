@@ -1,17 +1,22 @@
 <template>
-<div>
-    <div class="card col-md-8 px-0" style="margin-top: 30px;" v-for="post in posts" :key="post.uuid">
-        <div class="card-header">{{ post.title }}</div>
-        <div class="card-body">
-            <blockquote class="blockquote mb-0">
-                <p>{{ post.body }}</p>
-                <p class="lead mb-0"> <router-link :to="'/post/' + post.slug" style="color: #000!important;">Continue reading...</router-link></p>
-
-            </blockquote>
-        </div>
-    </div>
-
-</div>
+    <table class="table table-striped table-hover" style="margin-top: 20px;">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">body</th>
+            <th scope="col">Publish date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="post in posts">
+            <td>{{ post.id }}</td>
+            <td><router-link :to="'/post/' + post.slug">{{ post.title }}</router-link></td>
+            <td>{{ post.body }}</td>
+            <td>{{ post.created_at }}</td>
+        </tr>
+        </tbody>
+    </table>
 </template>
 
 <script>
@@ -26,6 +31,7 @@ export default {
         axios.get('/api/posts').then(response=>{
             this.posts = response.data.data
         })
+        console.log(this.posts);
     }
 }
 </script>

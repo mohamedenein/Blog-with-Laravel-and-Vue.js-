@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->text('body')->nullable();
             $table->text('teaser')->nullable();
-            $table->boolean('published')->default(false);
+            $table->boolean('published')->default(true);
             $table->timestamps();
         });
     }

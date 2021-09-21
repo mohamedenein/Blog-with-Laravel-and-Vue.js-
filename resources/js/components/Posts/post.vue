@@ -1,12 +1,13 @@
 <template>
 <div>
-    <div class="card col-md-8 px-0" style="margin-top: 30px;">
-        <div class="card-header">{{ post.title }}</div>
+    <div class="card text-center" style="margin">
+        <div class="card-header">Post Details</div>
         <div class="card-body">
-            <blockquote class="blockquote mb-0">
-                <p>{{ post.body }}</p>
-            </blockquote>
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.body }}</p>
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
         </div>
+        <div class="card-footer text-muted">Published at {{ post.created_at }}</div>
     </div>
 
 </div>
@@ -21,7 +22,7 @@ export default {
     mounted()
     {
         axios.get('/api/post/' + this.$route.params.slug)
-        .then(response => (this.post = response.data.data))
+             .then(response => (this.post = response.data.data))
     },
 }
 </script>
