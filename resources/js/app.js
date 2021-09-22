@@ -10,6 +10,8 @@ Vue.use(VueRouter)
 import App from './components/App';
 import PostsIndex from './components/Posts/index';
 import Post from './components/Posts/post';
+import PostCreate from './components/Posts/create';
+
 
 
 
@@ -26,6 +28,12 @@ const router = new VueRouter({
             component: Post,
             name:'post',
         },
+        {
+            path:'/posts/create',
+            component: PostCreate,
+            name:'posts.create',
+        },
+
     ]
 })
 
