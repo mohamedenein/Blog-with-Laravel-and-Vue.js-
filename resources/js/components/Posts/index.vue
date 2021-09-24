@@ -13,6 +13,7 @@
             <th scope="col">Title</th>
             <th scope="col">body</th>
             <th scope="col">Publish date</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +22,9 @@
             <td><router-link :to="'/post/' + post.slug">{{ post.title }}</router-link></td>
             <td>{{ post.body.substring(0,30) }}</td>
             <td>{{ post.created_at }}</td>
+            <td>
+                <router-link :to="'/posts/edit/' + post.slug" class="btn btn-success btn-sm">Edit</router-link>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -11,6 +11,7 @@ import App from './components/App';
 import PostsIndex from './components/Posts/index';
 import Post from './components/Posts/post';
 import PostCreate from './components/Posts/create';
+import PostEdit from './components/Posts/edit';
 
 
 
@@ -31,6 +32,11 @@ const router = new VueRouter({
         {
             path:'/posts/create',
             component: PostCreate,
+            name:'posts.create',
+        },
+        {
+            path:'/posts/edit/:slug',
+            component: PostEdit,
             name:'posts.create',
         },
 

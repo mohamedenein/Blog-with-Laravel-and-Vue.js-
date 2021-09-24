@@ -38,4 +38,17 @@ class PostController extends Controller
         return new PostResource($post);
 
     }
+
+    public function update(StorePostRequest $request, Post $post)
+    {
+        $post->uuid = Uuid::uuid();
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->slug = $request->title . Str::random(5);
+        $post->category_id = $request->category_id;
+        $post->save();
+
+        return new PostResource($post);
+
+    }
 }
