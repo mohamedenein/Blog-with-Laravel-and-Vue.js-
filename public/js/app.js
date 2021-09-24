@@ -2107,6 +2107,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2115,7 +2120,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         body: '',
         category_id: ''
-      }
+      },
+      errors: {}
     };
   },
   mounted: function mounted() {
@@ -2131,8 +2137,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/post/create', this.fields).then(function (response) {
         _this2.$router.push('/');
+      })["catch"](function (error) {
+        if (error.response.status === 422) {
+          _this2.errors = error.response.data.errors;
+        }
       });
-      console.log(this.fields);
     }
   }
 });
@@ -20757,7 +20766,13 @@ var render = function() {
           }
         }),
         _c("br"),
-        _vm._v("\n        Post Text:"),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.title
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(_vm._s(_vm.errors.title[0]))
+            ])
+          : _vm._e(),
+        _vm._v("\n\n        Post Text:"),
         _c("br"),
         _vm._v(" "),
         _c("textarea", {
@@ -20782,7 +20797,13 @@ var render = function() {
           }
         }),
         _c("br"),
-        _vm._v("\n        Category:"),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.body
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(_vm._s(_vm.errors.body[0]))
+            ])
+          : _vm._e(),
+        _vm._v("\n\n        Category:"),
         _c("br"),
         _vm._v(" "),
         _c(
@@ -20828,8 +20849,13 @@ var render = function() {
           ],
           2
         ),
-        _vm._v(" "),
         _c("br"),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.category_id
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(_vm._s(_vm.errors.category_id[0]))
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Save Post")])
       ]

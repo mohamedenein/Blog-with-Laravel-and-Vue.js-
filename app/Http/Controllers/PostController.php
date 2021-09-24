@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::when(request('category_id','') !='',function ($query) {
+        $posts = Post::when(request('category_id','') !='', function ($query) {
             $query->where('category_id', request('category_id'));
         })->paginate(20);
 

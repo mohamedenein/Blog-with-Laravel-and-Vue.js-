@@ -3,14 +3,19 @@
         <form  @submit.prevent="submitForm">
             Post Title:<br/>
             <input type="text" class="form-control" v-model="fields.title"><br/>
+            <div class="alert alert-danger" v-if="errors && errors.title">{{ errors.title[0]}}</div>
+
             Post Text:<br/>
             <textarea rows="10" class="form-control" v-model="fields.body"></textarea><br/>
+            <div class="alert alert-danger" v-if="errors && errors.body">{{ errors.body[0]}}</div>
+
             Category:<br/>
             <select class="form-control" v-model="fields.category_id">
                 <option value="">==Please Choose Categories ==</option>
                 <option v-for="category in categories" :value="category.id">{{ category.name}}</option>
-            </select>
-            <br/>
+            </select><br/>
+            <div class="alert alert-danger" v-if="errors && errors.category_id">{{ errors.category_id[0]}}</div>
+
             <button class="btn btn-primary">Save Post</button>
         </form>
     </div>
@@ -25,8 +30,8 @@ export default {
                 title: '',
                 body: '',
                 category_id: ''
-
             },
+            errors: {},
         }
     },
 
@@ -40,8 +45,12 @@ export default {
         submitForm(){
             axios.post('/api/post/create', this.fields).then(response => {
                 this.$router.push('/')
+            }).catch(error => {
+                if(error.response.status === 422){
+                    this.errors = error.response.data.errors;
+                }
+
             })
-            console.log(this.fields);
         }
     }
 
