@@ -10,5 +10,6 @@
         <div id="app">
             <app></app>
         </div>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="{{ mix('js/app.js') }}"></script>
 </html>

@@ -24,7 +24,10 @@
             <td>{{ post.created_at }}</td>
             <td>
                 <router-link :to="'/posts/edit/' + post.slug" class="btn btn-success btn-sm">Edit</router-link>
+                <button @click="delete_post(post.id)" class="btn btn-danger btn-sm">Delete</button>
+
             </td>
+
         </tr>
         </tbody>
     </table>
@@ -56,6 +59,30 @@ export default {
                 .then(response => {
                     this.posts = response.data;
                 });
+        },
+
+        delete_post(id) {
+            swal({
+                title: "Are Your Shure You Want to Delete The Post ?",
+                icon: "warning",
+                buttons: ["No", "Yes"],
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete('/api/post/' + id).then(response => {
+                        swal("Post Deleted Successfully");
+                        this.getResults()
+                    })
+                } else {
+                    swal("Post Not Deleted");
+                }
+            }).catch(error => {
+                swal({
+                    icon: 'error',
+                    title: 'Error Happened'
+                });
+            });
         }
     },
 

@@ -2266,6 +2266,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2289,6 +2292,31 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get('/api/posts?page=' + page + '&category_id=' + this.category_id).then(function (response) {
         _this2.posts = response.data;
+      });
+    },
+    delete_post: function delete_post(id) {
+      var _this3 = this;
+
+      swal({
+        title: "Are Your Shure You Want to Delete The Post ?",
+        icon: "warning",
+        buttons: ["No", "Yes"],
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          axios["delete"]('/api/post/' + id).then(function (response) {
+            swal("Post Deleted Successfully");
+
+            _this3.getResults();
+          });
+        } else {
+          swal("Post Not Deleted");
+        }
+      })["catch"](function (error) {
+        swal({
+          icon: 'error',
+          title: 'Error Happened'
+        });
       });
     }
   },
@@ -21279,6 +21307,19 @@ var render = function() {
                         attrs: { to: "/posts/edit/" + post.slug }
                       },
                       [_vm._v("Edit")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.delete_post(post.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
                     )
                   ],
                   1
